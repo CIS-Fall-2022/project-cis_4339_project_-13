@@ -87,6 +87,7 @@ let eventDataSchema = new Schema({
     collection: 'eventData'
 });
 
+//collection for orgData
 let orgDataSchema = new Schema({
     _id: { type: String, default: uuid.v1 },
     orgName: {
