@@ -27,8 +27,9 @@ mongoose
 const PORT = process.env.PORT || 3000;
 
 //setup
-app.use(express.json());
-app.use(morgan("dev"));
+app.use(cors()); //Allows for requests to be made from one website to another in our browser.
+app.use(express.json()); //Allows us to access the request body.
+app.use(morgan("dev")); //Enables incoming request logging in dev mode.
 
 //import routes
 const primaryDataRoute  = require('./routes/primaryData');
