@@ -7,7 +7,7 @@ let { orgdata } = require("../models/models");
 
 //GET all clients and events from declared org in .env
 router.get('/', (req, res, next) => {
-    orgdata.aggregate([ 
+    orgdata.aggregate([ //gathers data from both primaryData and eventsData
       { $match : {_id: process.env.orgId} },
       { $lookup : {
             from : 'primaryData',
