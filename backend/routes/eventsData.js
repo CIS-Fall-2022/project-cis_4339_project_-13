@@ -141,8 +141,8 @@ router.put("/addAttendee/:id", (req, res, next) => {
 });
 
 //DELETE- delete an event by id
-router.findByIdAndRemove("/:id", (req, res, next) => { 
-    eventdata.remove( 
+router.delete("/:id", (req, res, next) => { 
+    eventdata.findByIdAndRemove( 
         { _id: req.params.id },
         (error, data) => { 
             if (error) {
