@@ -3,7 +3,6 @@ const router = express.Router();
 
 //importing data model schemas
 let { primarydata } = require("../models/models"); 
-let { eventdata } = require("../models/models"); 
 
 //GET all entries
 router.get("/", (req, res, next) => { 
@@ -32,19 +31,6 @@ router.get("/id/:id", (req, res, next) => {
     );
 });
 
-//delete a client by id
-router.delete("/:id", (req, res, next) => { 
-    primarydata.remove( 
-        { _id: req.params.id },
-        (error, data) => { 
-            if (error) {
-                return next(error);
-            } else {
-                res.json(data); 
-            }
-        }
-    );
-});
 
 //GET entries based on search query
 //Ex: '...?firstName=Bob&lastName=&searchBy=name' 
@@ -69,19 +55,6 @@ router.get("/search/", (req, res, next) => {
     );
 });
 
-//GET events for a single client
-router.get("/events/:id", (req, res, next) => { 
-    eventdata.find( 
-        { attendees: req.params.id }, 
-        (error, data) => { 
-            if (error) {
-                return next(error);
-            } else {
-                res.json(data);
-            }
-        }
-    );
-});
 
 //POST - create a new client
 router.post("/", (req, res, next) => { 
@@ -113,6 +86,19 @@ router.put("/:id", (req, res, next) => {
             }
         }
     );
+});
+
+
+//delete a client by id
+router.delete('/:id', (req, res, next) => { 
+    primarydata.findByIdAndRemove(
+        {_id: req.params.id}, (error, data) => { 
+            if (error) {
+                return next(error);
+            } else {
+                res.json(data); 
+            }
+    });
 });
 
 module.exports = router;
