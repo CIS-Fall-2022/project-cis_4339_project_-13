@@ -28,21 +28,6 @@ router.get("/id/:id", (req, res, next) => {
     })
 });
 
-//GET events for a single client
-router.get("/events/:id", (req, res, next) => { 
-    eventdata.find( 
-        { attendees: req.params.id }, 
-        (error, data) => { 
-            if (error) {
-                return next(error);
-            } else {
-                res.json(data);
-            }
-        }
-    );
-});
-
-
 //GET entries based on search query
 //Ex: '...?eventName=Food&searchBy=name' 
 router.get("/search/", (req, res, next) => { 
@@ -94,6 +79,19 @@ router.post("/", (req, res, next) => {
     );
 });
 
+//DELETE- delete an event by id
+router.delete("/:id", (req, res, next) => { 
+    eventdata.findByIdAndRemove( 
+        { _id: req.params.id },
+        (error, data) => { 
+            if (error) {
+                return next(error);
+            } else {
+                res.json(data); 
+            }
+        }
+    );
+});
 
 //PUT - update an event by ID
 router.put("/:id", (req, res, next) => {
@@ -137,18 +135,18 @@ router.put("/addAttendee/:id", (req, res, next) => {
             }
         }
     );
-    
+
 });
 
-//DELETE- delete an event by id
-router.delete("/:id", (req, res, next) => { 
-    eventdata.findByIdAndRemove( 
-        { _id: req.params.id },
+//GET all events for clients that have signed up in the last 2 months
+router.get("/dashboard", (req, res, next) => { 
+    eventdata.find( 
+        { attendees: {$gte: 1}, orgId: {$eq: process.env.orgId}, date: {$gte: new Date().getMonth() -2, $lte: new Date() }}, {_id: 0, eventName: 1, attendees:1},
         (error, data) => { 
             if (error) {
                 return next(error);
             } else {
-                res.json(data); 
+                res.json(data);
             }
         }
     );
