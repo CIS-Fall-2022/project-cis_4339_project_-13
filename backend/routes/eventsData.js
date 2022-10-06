@@ -6,7 +6,7 @@ let { eventdata } = require("../models/models");
 
 //GET all entries
 router.get("/", (req, res, next) => { 
-    eventdata.find( 
+    eventdata.find( {orgId: process.env.orgId},
         (error, data) => {
             if (error) {
                 return next(error);
