@@ -40,7 +40,8 @@ let primaryDataSchema = new Schema({
         zip: {
             type: String,
         }
-    }
+    },
+    orgId: { type: String, default: process.env.orgId}
 }, {
     collection: 'primaryData',
     timestamps: true
@@ -82,14 +83,15 @@ let eventDataSchema = new Schema({
     },
     attendees: [{
         type: String
-    }]
+    }],
+    orgId: { type: String, default: process.env.orgId}
 }, {
     collection: 'eventData'
 });
 
 //collection for orgData
 let orgDataSchema = new Schema({
-    _id: { type: String, default: uuid.v1 },
+    _id: { type: String},
     orgName: {
         type: String,
         require: true
@@ -132,6 +134,8 @@ let orgDataSchema = new Schema({
         zip: {
             type: String,
         }
+        ,
+        orgId: { type: String}
         },
     },
 
@@ -170,8 +174,8 @@ let orgDataSchema = new Schema({
         },
         attendees: [{
             type: String
-        }]
-
+        }],
+        orgId: { type: String}
     },
   
 }, {
