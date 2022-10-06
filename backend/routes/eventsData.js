@@ -65,7 +65,7 @@ router.get("/client/:id", (req, res, next) => {
     );
 });
 
-//POST
+//POST - create a new event
 router.post("/", (req, res, next) => { 
     eventdata.create( 
         req.body, 
@@ -79,7 +79,21 @@ router.post("/", (req, res, next) => {
     );
 });
 
-//PUT
+//delete an event by id
+router.delete("/:id", (req, res, next) => { 
+    eventdata.remove( 
+        { _id: req.params.id },
+        (error, data) => { 
+            if (error) {
+                return next(error);
+            } else {
+                res.json(data); 
+            }
+        }
+    );
+});
+
+//PUT - update an event by ID
 router.put("/:id", (req, res, next) => {
     eventdata.findOneAndUpdate(
         { _id: req.params.id },
