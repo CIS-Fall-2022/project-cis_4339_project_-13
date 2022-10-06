@@ -1,20 +1,27 @@
 const express = require("express"); 
 const router = express.Router(); 
+require("dotenv").config();  
 
 //importing data model schemas
 let { orgdata } = require("../models/models"); 
 
-//GET all entries
-router.get("/", (req, res, next) => { 
-    orgdata.find( 
-        (error, data) => {
-            if (error) {
-                return next(error);
-            } else {
-                res.json(data);
-            }
+//GET all clients and events from declared org in .env
+router.get('/', (req, res, next) => {
+    orgdata.aggregate([ 
+      { $match : {_id: process.env.orgId} },
+      { $lookup : {
+          from : 'primaryData',
+          localField : '_id',
+          foreignField : 'orgId',
+          as : 'primaryData'
+      } }
+    ], (error, data) => {
+        if (error) {
+          return next(error)
+        } else {
+          res.json(data);
         }
-    ).sort({ 'updatedAt': -1 }).limit(10);
-});
+    });
+  });
 
 module.exports = router;
