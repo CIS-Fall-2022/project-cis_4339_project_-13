@@ -32,6 +32,20 @@ router.get("/id/:id", (req, res, next) => {
     );
 });
 
+//delete a client by id
+router.delete("/:id", (req, res, next) => { 
+    primarydata.remove( 
+        { _id: req.params.id },
+        (error, data) => { 
+            if (error) {
+                return next(error);
+            } else {
+                res.json(data); 
+            }
+        }
+    );
+});
+
 //GET entries based on search query
 //Ex: '...?firstName=Bob&lastName=&searchBy=name' 
 router.get("/search/", (req, res, next) => {  
@@ -69,7 +83,7 @@ router.get("/events/:id", (req, res, next) => {
     );
 });
 
-//POST
+//POST - create a new client
 router.post("/", (req, res, next) => { 
     primarydata.create( 
         req.body,
