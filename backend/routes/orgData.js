@@ -10,11 +10,17 @@ router.get('/', (req, res, next) => {
     orgdata.aggregate([ 
       { $match : {_id: process.env.orgId} },
       { $lookup : {
-          from : 'primaryData',
-          localField : '_id',
-          foreignField : 'orgId',
-          as : 'primaryData'
-      } }
+            from : 'primaryData',
+            localField : '_id',
+            foreignField : 'orgId',
+            as : 'primaryData'
+      } },
+      { $lookup : {
+            from: 'eventData',
+            localField : '_id',
+            foreignField : 'orgId',
+            as : 'eventData'
+      }}
     ], (error, data) => {
         if (error) {
           return next(error)
