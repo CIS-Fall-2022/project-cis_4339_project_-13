@@ -30,4 +30,9 @@ router.get('/', (req, res, next) => {
     });
   });
 
+router.get('/org', (req, res, next) => {
+  return res.json({orgId: process.env.orgId})
+     
+  });
+
 module.exports = router;
