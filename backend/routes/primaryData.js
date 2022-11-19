@@ -3,6 +3,7 @@ const router = express.Router();
 
 //importing data model schemas
 let { primarydata } = require("../models/models"); 
+let { eventdata } = require("../models/models")
 
 //GET all entries
 router.get("/", (req, res, next) => { 
@@ -35,7 +36,7 @@ router.get("/id/:id", (req, res, next) => {
 //GET entries based on search query
 //Ex: '...?firstName=Bob&lastName=&searchBy=name' 
 router.get("/search/", (req, res, next) => {  
-    let dbQuery = "";
+    let dbQuery = "http://localhost:3000/primaryData/search/";
     if (req.query["searchBy"] === 'name') {
         dbQuery = { firstName: { $regex: `^${req.query["firstName"]}`, $options: "i" }, lastName: { $regex: `^${req.query["lastName"]}`, $options: "i" } }
     } else if (req.query["searchBy"] === 'number') {
@@ -96,9 +97,11 @@ router.delete('/:id', (req, res, next) => {
             if (error) {
                 return next(error);
             } else {
+                eventdata.updateMany( {$pull: {attendees: { $in: req.params.id}}}) //removes client from event when deleted
                 res.json(data); 
             }
     });
+    
 });
 
 module.exports = router;
