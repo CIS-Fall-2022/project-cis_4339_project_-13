@@ -81,13 +81,15 @@
               <th class="p-4 text-left">Name</th>
               <th class="p-4 text-left">Phone number</th>
               <th class="p-4 text-left">City</th>
+              <th class="p-4 text-left">  </th>
             </tr>
           </thead>
           <tbody class="divide-y divide-gray-300">
-            <tr @click="editClient(client._id)" v-for="client in queryData" :key="client._id">
-              <td class="p-2 text-left">{{ client.firstName + " " + client.lastName }}</td>
-              <td class="p-2 text-left">{{ client.phoneNumbers[0].primaryPhone }}</td>
-              <td class="p-2 text-left">{{ client.address.city }}</td>
+            <tr v-for="client in queryData" :key="client._id">
+              <td @click.self="editClient(client._id)" class="p-2 text-left">{{ client.firstName + " " + client.lastName }}</td>
+              <td @click.self="editClient(client._id)" class="p-2 text-left">{{ client.phoneNumbers[0].primaryPhone }}</td>
+              <td @click.self="editClient(client._id)" class="p-2 text-left">{{ client.address.city }}</td>
+              <div><td class="p-2 text-left"> <button class="bg-red-700 text-white rounded" @click="deleteClient(client._id)" type="submit"> Delete </button> </td> </div><!-- delete buttons for each client -->
             </tr>
           </tbody>
         </table>
@@ -148,6 +150,15 @@ export default {
     editClient(clientID) {
       this.$router.push({ name: "updateclient", params: { id: clientID } });
     },
+    deleteClient(clientID) { //uses backend API to delete a client based on ID
+      let apiURL = import.meta.env.VITE_ROOT_API + `/primarydata/` + clientID ;
+      if (window.confirm("Are you sure you want to delete?")) {
+      axios.delete(apiURL).then(() => {
+        alert("Client has been succesfully deleted.");
+        window.location.reload(); //reloads page after successful delete
+      }
+    
+    )}},
   },
 };
 </script>

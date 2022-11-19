@@ -72,10 +72,11 @@
             </tr>
           </thead>
           <tbody class="divide-y divide-gray-300">
-            <tr @click="editEvent(event._id)" v-for="event in queryData" :key="event._id">
-              <td class="p-2 text-left">{{ event.eventName }}</td>
-              <td class="p-2 text-left">{{ formattedDate(event.date) }}</td>
-              <td class="p-2 text-left">{{ event.address.line1 }}</td>
+            <tr v-for="event in queryData" :key="event._id">
+              <td @click="editEvent(event._id)" class="p-2 text-left">{{ event.eventName }}</td>
+              <td @click="editEvent(event._id)" class="p-2 text-left">{{ formattedDate(event.date) }}</td>
+              <td @click="editEvent(event._id)" class="p-2 text-left">{{ event.address.line1 }}</td>
+              <div><td class="p-2 text-left"> <button class="bg-red-700 text-white rounded" @click="deleteEvent(event._id)" type="submit"> Delete </button> </td> </div><!-- delete buttons for each event -->
             </tr>
           </tbody>
         </table>
@@ -140,6 +141,15 @@ export default {
     editEvent(eventID) {
       this.$router.push({ name: "eventdetails", params: { id: eventID } });
     },
+    deleteEvent(eventID) { //uses backend API to delete an event based on ID
+      let apiURL = import.meta.env.VITE_ROOT_API + `/eventdata/` + eventID ;
+      if (window.confirm("Are you sure you want to delete?")) {
+      axios.delete(apiURL).then(() => {
+        alert("Event has been succesfully deleted.");
+        window.location.reload(); //reloads page after successful delete
+      }
+    
+    )}},
   },
 };
 </script>
