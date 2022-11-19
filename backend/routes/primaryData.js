@@ -97,11 +97,10 @@ router.delete('/:id', (req, res, next) => {
             if (error) {
                 return next(error);
             } else {
-                eventdata.updateMany( {$pull: {attendees: { $in: req.params.id}}}) //removes client from event when deleted
-                res.json(data); 
+                eventdata.updateMany( {}, {$pull: {attendees: { $in: [req.params.id]}}}, (error, data) => { res.json(data)}) //removes client from event when deleted
+                //res.json(data); 
             }
     });
-    
 });
 
 module.exports = router;
