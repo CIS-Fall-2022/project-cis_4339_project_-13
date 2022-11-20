@@ -224,15 +224,16 @@
               </thead>
               <tbody class="divide-y divide-gray-300">
                 <tr
-                  @click="editClient(client.attendeeID)"
+                  
                   v-for="client in attendeeData"
                   :key="client._id"
                 >
                   <td
-                    class="p-2 text-left"
+                    @click="editClient(client.attendeeID)" class="p-2 text-left"
                   >{{ client.attendeeFirstName + " " + client.attendeeLastName }}</td>
-                  <td class="p-2 text-left">{{ client.attendeeCity }}</td>
-                  <td class="p-2 text-left">{{ client.attendeePhoneNumber }}</td>
+                  <td @click="editClient(client.attendeeID)" class="p-2 text-left">{{ client.attendeeCity }}</td>
+                  <td @click="editClient(client.attendeeID)" class="p-2 text-left">{{ client.attendeePhoneNumber }}</td>
+                  <div><td class="p-2 text-left"> <button class="bg-red-700 text-white rounded" @click="deleteClient(client.attendeeID)" type="submit"> Delete </button> </td> </div><!-- delete buttons for each client -->
                 </tr>
               </tbody>
             </table>
@@ -310,7 +311,9 @@ export default {
     formattedDate(datetimeDB) {
       return DateTime.fromISO(datetimeDB).plus({ days: 1 }).toLocaleString();
     },
-    handleEventUpdate() {
+    async handleEventUpdate() {
+      const isFormCorrect = await this.v$.$validate(); //added validation to update event
+      if (isFormCorrect) {
       this.event.services = this.checkedServices;
       let apiURL = import.meta.env.VITE_ROOT_API + `/eventdata/${this.id}`;
       axios.put(apiURL, this.event).then(() => {
@@ -318,11 +321,20 @@ export default {
         this.$router.back().catch((error) => {
           console.log(error);
         });
-      });
+      })}
     },
     editClient(clientID) {
       this.$router.push({ name: "updateclient", params: { id: clientID } });
     },
+    deleteClient(clientID) { //uses backend API to delete a client based on ID
+      let apiURL = import.meta.env.VITE_ROOT_API + '/eventdata/delAttendee/' + this.$route.params.id; 
+      if (window.confirm("Are you sure you want to delete?")) {
+      axios.put(apiURL, {attendee: clientID}).then(() => {
+        alert("Client has been succesfully deleted.");
+        window.location.reload(); //reloads page after successful delete
+      }
+    
+    )}},
   },
   // sets validations for the various data properties
   validations() {

@@ -137,6 +137,22 @@ router.put("/addAttendee/:id", (req, res, next) => {
     );
 
 });
+// delete attendee from event
+router.put("/delAttendee/:id", (req, res, next) => {
+    //only add attendee if not yet signed uo
+    eventdata.updateOne(
+        { _id: req.params.id }, 
+        { $pull: { attendees: req.body.attendee } }, {timestamps: true},
+        (error, data) => {
+            if (error) {
+                consol
+                return next(error);
+            } else {
+                res.json(data);
+            }
+        }
+    );
+});
 
 //GET all events for clients that have signed up in the last 2 months
 router.get("/dashboard", (req, res, next) => { 

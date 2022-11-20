@@ -5,6 +5,7 @@
 <script>
 import { Chart, registerables } from 'chart.js'
 
+//code taken from class and edited
 Chart.register(...registerables);
 export default {
   props: {

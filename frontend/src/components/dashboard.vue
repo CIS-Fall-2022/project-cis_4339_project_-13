@@ -78,7 +78,7 @@ export default {
     };
   },
   methods: {
-    async fetchData() {
+    async fetchData() { //code taken from class and edited
       try {
         this.error = null;
         this.loading = true;
@@ -87,7 +87,7 @@ export default {
         //"re-organizing" - mapping json from the response
         this.tabledata = response.data
         this.labels = response.data.map((item) => item.eventName);
-        this.attendees = response.data.map((item) => item.attendees);
+        this.attendees = response.data.map((item) => item.attendees[0]);
       } catch (err) {
         if (err.response) {
           // client received an error response (5xx, 4xx)

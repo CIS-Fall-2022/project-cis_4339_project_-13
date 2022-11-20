@@ -96,7 +96,7 @@ export default {
       return DateTime.fromISO(datetimeDB).plus({ days: 1 }).toLocaleString();
     },
     async handleClientUpdate() {
-      const isFormCorrect = await this.v$.$validate();
+      const isFormCorrect = await this.v$.$validate(); //validation for client update 
       if(isFormCorrect) {
       let apiURL = import.meta.env.VITE_ROOT_API + `/primarydata/${this.id}`;
       axios.put(apiURL, this.client).then(() => {

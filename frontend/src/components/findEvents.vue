@@ -112,6 +112,7 @@ export default {
     },
     handleSubmitForm() {
       let apiURL = "";
+      
       if (this.searchBy === "Event Name") {
         apiURL =
           import.meta.env.VITE_ROOT_API +
