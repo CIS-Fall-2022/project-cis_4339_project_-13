@@ -86,7 +86,8 @@ let eventDataSchema = new Schema({
     }],
     orgId: { type: String, default: process.env.orgId}
 }, {
-    collection: 'eventData'
+    collection: 'eventData',
+    timestamps: true
 });
 
 //collection for orgData

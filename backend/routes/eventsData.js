@@ -141,7 +141,7 @@ router.put("/addAttendee/:id", (req, res, next) => {
 //GET all events for clients that have signed up in the last 2 months
 router.get("/dashboard", (req, res, next) => { 
     eventdata.find( 
-        { attendees: {$gte: 1}, orgId: {$eq: process.env.orgId}, date: {$gte: new Date().getMonth() -2, $lte: new Date() }}, {_id: 0, eventName: 1, date: 1, attendees: {$size: '$attendees'}},
+        { attendees: {$gte: 1}, orgId: {$eq: process.env.orgId}, date: {$gte: new Date().getMonth() -2, $lte: new Date() }}, {_id: 0, eventName: 1, attendees: {$size: '$attendees'}},
         (error, data) => { 
             if (error) {
                 return next(error);
