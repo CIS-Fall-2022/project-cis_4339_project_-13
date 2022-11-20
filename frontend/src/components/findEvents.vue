@@ -143,8 +143,8 @@ export default {
       this.$router.push({ name: "eventdetails", params: { id: eventID } });
     },
     deleteEvent(eventID) { //uses backend API to delete an event based on ID
-      let apiURL = import.meta.env.VITE_ROOT_API + `/eventdata/` + eventID ;
-      if (window.confirm("Are you sure you want to delete?")) {
+      let apiURL = import.meta.env.VITE_ROOT_API + `/eventdata/` + eventID ; //eventID appended to url
+      if (window.confirm("Are you sure you want to delete?")) { //confirmation for delete
       axios.delete(apiURL).then(() => {
         alert("Event has been succesfully deleted.");
         window.location.reload(); //reloads page after successful delete

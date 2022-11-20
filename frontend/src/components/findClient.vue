@@ -151,8 +151,8 @@ export default {
       this.$router.push({ name: "updateclient", params: { id: clientID } });
     },
     deleteClient(clientID) { //uses backend API to delete a client based on ID
-      let apiURL = import.meta.env.VITE_ROOT_API + `/primarydata/` + clientID ;
-      if (window.confirm("Are you sure you want to delete?")) {
+      let apiURL = import.meta.env.VITE_ROOT_API + `/primarydata/` + clientID ; //clientID appended to url
+      if (window.confirm("Are you sure you want to delete?")) { //confirmation for delete
       axios.delete(apiURL).then(() => {
         alert("Client has been succesfully deleted.");
         window.location.reload(); //reloads page after successful delete
