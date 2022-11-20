@@ -29,7 +29,6 @@ export default {
             barThickness: 80
           },
         ],
-        borderWidth: 1
       },
       options: {
         scales: {
