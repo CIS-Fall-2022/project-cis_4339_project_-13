@@ -95,14 +95,16 @@ export default {
     formattedDate(datetimeDB) {
       return DateTime.fromISO(datetimeDB).plus({ days: 1 }).toLocaleString();
     },
-    handleClientUpdate() {
+    async handleClientUpdate() {
+      const isFormCorrect = await this.v$.$validate();
+      if(isFormCorrect) {
       let apiURL = import.meta.env.VITE_ROOT_API + `/primarydata/${this.id}`;
       axios.put(apiURL, this.client).then(() => {
         alert("Update has been saved.");
         this.$router.back().catch((error) => {
           console.log(error);
         });
-      });
+      })}
     },
     addToEvent() {
       this.eventsChosen.forEach((event) => {

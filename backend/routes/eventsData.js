@@ -33,7 +33,7 @@ router.get("/id/:id", (req, res, next) => {
 router.get("/search/", (req, res, next) => { 
     let dbQuery = "";
     if (req.query["searchBy"] === 'name') {
-        dbQuery = { eventName: { $regex: `^${req.query["eventName"]}`, $options: "i" } }
+        dbQuery = { eventName: { $regex: `^${req.query["eventName"]}`, $options: "i",  }, orgId: {$eq: process.env.orgId} }
     } else if (req.query["searchBy"] === 'date') {
         dbQuery = {
             date:  req.query["eventDate"]
