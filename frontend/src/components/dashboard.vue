@@ -39,7 +39,7 @@
       <br />
       <br />
     </div>
-    <div class="flex flex-col col-span-2" style="width: 400px; min-height: 100px; height: auto; margin: 80px auto 0px auto; padding: 10px 10px; overflow:auto">
+    <div class="flex flex-col col-span-2" style="width: 400px; min-height: 100px; height: auto; margin: 5px auto 0px auto; padding: 10px 10px; overflow:auto">
       <table style="border: 1px solid black;"> 
         <thead>
         <tr> 
@@ -49,8 +49,8 @@
         </thead>
         <tbody>
           <tr v-for="event in tabledata" :key="event._id"> 
-            <td> {{event.eventName}}</td>
-            <td> {{event.attendees}} </td>
+            <td style="border: 1px solid black; text-align: center"> {{event.eventName}}</td>
+            <td style="border: 1px solid black; text-align: center"> {{event.attendees[0]}} </td>
 
 
           </tr>
