@@ -3,6 +3,7 @@
     <div>
       <h1 class="font-bold text-4xl text-red-700 tracking-widest text-center mt-10">Update Event</h1>
     </div>
+    <!-- Start of form to obtain Event Details -->
     <div class="px-10 py-20">
       <form @submit.prevent="handleSubmitForm">
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-10">
@@ -10,6 +11,7 @@
           <!-- form field -->
           <div class="flex flex-col">
             <label class="block">
+              <!-- Takes in required Event Name -->
               <span class="text-gray-700">Event Name</span>
               <span style="color:#ff0000">*</span>
               <input
@@ -30,6 +32,7 @@
           <!-- form field -->
           <div class="flex flex-col">
             <label class="block">
+              <!-- Takes in required Date -->
               <span class="text-gray-700">Date</span>
               <span style="color:#ff0000">*</span>
               <input
@@ -52,6 +55,7 @@
           <!-- form field -->
           <div class="flex flex-col">
             <label class="block">
+              <!-- Takes in optional Description -->
               <span class="text-gray-700">Description</span>
               <textarea
                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
@@ -65,6 +69,7 @@
           <div></div>
           <!-- form field -->
           <div class="flex flex-col grid-cols-3">
+            <!-- Optional Services that can be selected -->
             <label>Services Offered at Event</label>
             <div>
               <label for="familySupport" class="inline-flex items-center">
@@ -123,6 +128,7 @@
 
         <!-- grid container -->
         <div class="mt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-10">
+          <!-- Takes in Event Address -->
           <h2 class="text-2xl font-bold">Address</h2>
           <!-- form field -->
           <div class="flex flex-col">
