@@ -11,11 +11,12 @@
           <select
             class="rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
             v-model="searchBy"
-          >
+          ><!-- Lets user choose between Client Name or Number to lookup client -->
             <option value="Client Name">Client Name</option>
             <option value="Client Number">Client Number</option>
           </select>
         </div>
+        <!-- Displays Client Name search field -->
         <div class="flex flex-col" v-if="searchBy === 'Client Name'">
           <label class="block">
             <input
