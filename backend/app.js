@@ -40,6 +40,7 @@ app.use('/primaryData', primaryDataRoute);
 app.use('/eventData', eventsDataRoute)
 app.use('/orgData', orgDataRoute )
 
+//specifiy which PORT to listen on
 app.listen(PORT, () => {
   console.log("Server started listening on port : ", PORT);
 });
