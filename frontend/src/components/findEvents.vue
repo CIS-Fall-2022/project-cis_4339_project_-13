@@ -11,7 +11,7 @@
           <select
             class="rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
             v-model="searchBy"
-          >
+          ><!-- Lets user choose between Event Name or Date to lookup Event -->
             <option value="Event Name">Event Name</option>
             <option value="Event Date">Event Date</option>
           </select>
