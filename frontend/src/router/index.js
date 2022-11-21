@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
+// used to import/export components
 const routes = [
     {
         path: '/',
