@@ -5,6 +5,7 @@ const Schema = mongoose.Schema;
 //collection for intakeData
 let primaryDataSchema = new Schema({
     _id: { type: String, default: uuid.v1 },
+    //require: true is used to require this field to be filled with valid data 
     firstName: {
         type: String,
         require: true
