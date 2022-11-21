@@ -39,6 +39,7 @@
       <br />
       <br />
     </div>
+    <!-- Creates table to display "Event Name" and "Number of Attendees" from database -->
     <div class="flex flex-col col-span-2" style="width: 400px; min-height: 100px; height: auto; margin: 5px auto 0px auto; padding: 10px 10px; overflow:auto">
       <table style="border: 1px solid black;"> 
         <thead>
