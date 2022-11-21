@@ -1,5 +1,6 @@
 <template>
   <main class="flex flex-row">
+  <!-- Create links to other pages in top header-->
     <div id="_container" class="h-auto">
       <header class="w-full">
         <section class="text-center">
@@ -9,30 +10,35 @@
           <ul class="flex flex-col gap-4">
             <li>
               <router-link to="/">
+              <!-- Link to the main page-->
                 <span style="position: relative; top: 6px" class="material-icons">dashboard</span>
                 Dashboard
               </router-link>
             </li>
             <li>
               <router-link to="/intakeform">
+              <!-- Link to the intake form page-->
                 <span style="position: relative; top: 6px" class="material-icons">people</span>
                 Client Intake Form
               </router-link>
             </li>
             <li>
               <router-link to="/eventform">
+              <!-- Link to the create event page-->
                 <span style="position: relative; top: 6px" class="material-icons">event</span>
                 Create Event
               </router-link>
             </li>
             <li>
               <router-link to="/findclient">
+              <!-- Link to the find client page-->
                 <span style="position: relative; top: 6px" class="material-icons">search</span>
                 Find Client
               </router-link>
             </li>
             <li>
               <router-link to="/findEvents">
+              <!-- Link to the find event page-->
                 <span style="position: relative; top: 6px" class="material-icons">search</span>
                 Find Event
               </router-link>
